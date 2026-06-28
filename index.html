@@ -205,6 +205,16 @@
   .warn-box-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--red); margin-bottom: 6px; display: flex; align-items: center; gap: 5px; }
   .warn-box p { font-size: 13px; line-height: 1.65; color: var(--gray-5); margin-bottom: 6px; }
   .warn-box p:last-child { margin-bottom: 0; }
+  
+  /* Info-Box */
+  .info-box {
+    background: var(--green-bg); border: 1px solid #DFA8A4;
+    border-left: 3px solid var(--green); border-radius: 0 4px 4px 0;
+    padding: 13px 16px; margin: 14px 0 18px 0;
+  }
+  .info-box-label { font-size: 15px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--red); margin-bottom: 6px; display: flex; align-items: center; gap: 5px; }
+  .info-box p { font-size: 18px; line-height: 1.65; color: var(--gray-5); margin-bottom: 6px; }
+  .info-box p:last-child { margin-bottom: 0; }
 
   /* Dos-&-Don'ts-Grid */
   .dnd-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 14px 0 20px 0; }
@@ -238,6 +248,10 @@
 
   /* ── RIGHT PANEL ── */
   .right-panel { width: 220px; flex-shrink: 0; padding: 28px 0 40px 0; }
+
+  @media print {
+    .right-panel { display: none !important; }
+  }
   .info-card { background: var(--white); border: 1px solid var(--gray-2); border-radius: 4px; overflow: hidden; margin-bottom: 14px; }
   .info-card-header { background: var(--gray-2); padding: 7px 12px; font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--gray-4); }
   .info-card-body { padding: 10px 12px; font-size: 12px; color: var(--gray-5); line-height: 1.6; }
@@ -253,120 +267,8 @@
   .site-footer a { color: #bbb; text-decoration: none; }
   .footer-links { display: flex; gap: 16px; }
 
-  /* ══════════════════════════════════════════
-     DRUCKVORLAGE – nur beim Druck sichtbar
-     am Bildschirm ausgeblendet
-  ══════════════════════════════════════════ */
-  .print-template { display: none; }
-
-  /* ── PRINT STYLES ── */
-  @media print {
-    /* Intranet-Chrome ausblenden */
-    .topbar, .brand-header .header-search, .navbar, .breadcrumb-bar,
-    .page-actions, .sidebar, .right-panel, .site-footer,
-    .toc, .kompakt-box { display: none !important; }
-
-    body { background: #fff; font-size: 12px; }
-    .layout { display: block; max-width: none; min-height: 0; }
-    .content-area { display: block; }
-    .main { padding: 0; }
-
-    /* Wiki-Inhalt auf Seite 1 */
-    .wiki-screen { display: none !important; }
-
-    /* Druckvorlage einblenden */
-    .print-template { display: block !important; }
-
-    @page { size: A4; margin: 14mm 14mm 16mm 14mm; }
-    @page :first { margin-top: 10mm; }
-  }
-
-
-  /* ══════════════════════════════════════
-     DRUCKVORLAGE – Styling (nur Print)
-  ══════════════════════════════════════ */
-  @media print {
-
-    /* ─ Seitenkopf Druckvorlage ─ */
-    .pt-header {
-      display: flex; align-items: center; justify-content: space-between;
-      border-bottom: 3px solid #C0241A; padding-bottom: 8mm; margin-bottom: 6mm;
-    }
-    .pt-logo-area { display: flex; align-items: center; gap: 8px; }
-    .pt-brand { font-size: 22pt; font-weight: 900; color: #C0241A; font-style: italic; letter-spacing: -0.5px; line-height: 1; }
-    .pt-subtitle { font-size: 7pt; color: #6B6560; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px; }
-    .pt-doc-info { text-align: right; font-size: 8pt; color: #6B6560; line-height: 1.6; }
-    .pt-doc-title { font-size: 12pt; font-weight: 800; color: #3A3633; }
-
-    /* ─ Felder-Sektion ─ */
-    .pt-section { margin-bottom: 5mm; }
-    .pt-section-title {
-      font-size: 8pt; font-weight: 800; text-transform: uppercase;
-      letter-spacing: 0.08em; color: #fff; background: #3A3633;
-      padding: 2mm 4mm; margin-bottom: 3mm;
-      display: flex; align-items: center; gap: 4mm;
-      -webkit-print-color-adjust: exact; print-color-adjust: exact;
-    }
-    .pt-section-title.red { background: #C0241A; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    .pt-section-title .pt-num {
-      width: 14pt; height: 14pt; border-radius: 50%;
-      background: rgba(255,255,255,0.25); color: #fff;
-      display: inline-flex; align-items: center; justify-content: center;
-      font-size: 8pt; font-weight: 900; flex-shrink: 0;
-    }
-
-    /* ─ Zwei-Spalten-Grid ─ */
-	.pt-grid-1 { display: grid; grid-template-columns: 1fr; gap: 4mm; margin-bottom: 3mm; }
-    .pt-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; margin-bottom: 3mm; }
-    .pt-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3mm; margin-bottom: 3mm; }
-
-    /* ─ Eingabe-Felder ─ */
-    .pt-field { margin-bottom: 2.5mm; }
-    .pt-label {
-      font-size: 7pt; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 0.06em; color: #6B6560; margin-bottom: 1mm; display: block;
-    }
-    .pt-line {
-      border: none; border-bottom: 1px solid #C5C1BC;
-      width: 100%; height: 6mm; display: block; background: transparent;
-    }
-    .pt-box {
-      border: 1px solid #C5C1BC; width: 100%; min-height: 24mm;
-      display: block; background: transparent;
-    }
-    .pt-box.tall { min-height: 26mm; }
-    .pt-box.xtall { min-height: 30mm; }
-
-    /* ─ Checkliste im Druck ─ */
-    .pt-checklist { list-style: none; padding: 0; }
-    .pt-checklist li {
-      font-size: 8.5pt; line-height: 1.5; padding: 1.5mm 0 1.5mm 6mm;
-      border-bottom: 1px solid #E8E6E4; position: relative;
-    }
-    .pt-checklist li:last-child { border-bottom: none; }
-    .pt-checklist li::before { content: '☐'; position: absolute; left: 0; color: #8C8680; font-size: 10pt; line-height: 1.2; }
-
-    /* ─ Ablauf-Schritte horizontal ─ */
-    .pt-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2mm; margin-bottom: 3mm; }
-    .pt-step { border: 1px solid #C5C1BC; border-top: 3px solid #C0241A; padding: 2mm 3mm; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    .pt-step-num { font-size: 7pt; font-weight: 800; color: #C0241A; margin-bottom: 1mm; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    .pt-step-title { font-size: 7.5pt; font-weight: 700; color: #3A3633; margin-bottom: 1.5mm; }
-    .pt-step-box { border: none; border-bottom: 1px solid #C5C1BC; width: 100%; height: 5.5mm; display: block; margin-bottom: 1mm; }
-
-    /* ─ Einwand-Notizbereich ─ */
-    .pt-einwand-row { display: grid; grid-template-columns: 2fr 3fr; gap: 3mm; margin-bottom: 2mm; }
-    .pt-einwand-label { font-size: 7pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #6B6560; margin-bottom: 1mm; display: block; }
-
-    /* ─ Fußzeile Druckvorlage ─ */
-    .pt-footer {
-      border-top: 3px solid #C5C1BC; margin-top: 10mm; padding-top: 3mm;
-      display: flex; justify-content: space-between; font-size: 7pt; color: #6B6560;
-    }
-    .pt-footer-field { display: flex; gap: 2mm; align-items: center; }
-    .pt-footer-line { border-bottom: 1px solid #C5C1BC; width: 35mm; height: 5mm; }
-
-    /* Seitenumbruch vor Druckvorlage */
-    .print-template { page-break-before: always; }
+  
+	
   }
 </style>
 </head>
@@ -451,9 +353,7 @@
               <span>&#128203; Kategorie: Gesprächsführung</span>
             </div>
           </div>
-          <div class="page-actions">
-            <a href="#" class="btn btn-outline" onclick="window.print();return false;">&#128424; Vorlage drucken</a>
-          </div>
+          
         </div>
 
         <!-- TOC -->
@@ -521,7 +421,15 @@
               <p>Strukturierte Notizen helfen Ihnen, nichts zu vergessen.</p>
             </div>
           </section>
+		  
+		  <hr>
+		  <div class="info-box">
+              <div class="gut-box-label">Weitere OPTIONALE Infos</div>
+              <p>Hier folgen noch weitere Infos zum Gespräch.</p>
+            </div>
 
+		  <hr>
+<br>
           <section id="gespraech">
             <h2><span class="num-badge">2</span> Tipps zur Gesprächsführung</h2>
             <p>Ein gutes Gespräch folgt einer klaren Reihenfolge. Das gibt dem Kunden das Gefühl, dass er ernst genommen wird – und Ihnen die Kontrolle über den Ablauf.</p>
@@ -581,7 +489,6 @@
                   <div class="dnd-item do">Aktiv zuhören – Blickkontakt halten, nicken, nachfragen.</div>
                   <div class="dnd-item do">Den Kunden mit seinem Namen ansprechen.</div>
                   <div class="dnd-item do">Sich für Unannehmlichkeiten entschuldigen.</div>
-                  <div class="dnd-item do">Konkrete Lösungen anbieten, keine leeren Versprechen.</div>
                   <div class="dnd-item do">Ruhig und freundlich bleiben – auch bei lauten Kunden.</div>
 				  <div class="dnd-item do">Wählen Sie einen ruhigen Ort für das Gespräch, möglichst ohne andere Kunden.</div>
                   <div class="dnd-item do">Alles Wichtige nach oder während dem Gespräch dokumentieren.</div>
@@ -594,7 +501,6 @@
                   <div class="dnd-item dont">Den Kunden unterbrechen oder seine Aussagen kleinreden.</div>
                   <div class="dnd-item dont">Schuld auf Kollegen oder andere Abteilungen schieben.</div>
                   <div class="dnd-item dont">Etwas versprechen, das Sie nicht einhalten können.</div>
-                  <div class="dnd-item dont">Fachbegriffe benutzen, den der Kunde nicht versteht.</div>
                   <div class="dnd-item dont">Das Gespräch ohne klares Ergebnis beenden.</div>
                   <div class="dnd-item dont">Emotionen des Kunden ignorieren oder abtun.</div>
 				  <div class="dnd-item dont">Sagen: „Das ist nicht mein Bereich" – ohne eine Alternative zu nennen.</div>
