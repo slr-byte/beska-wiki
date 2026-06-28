@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kundengespräch vorbereiten – Beska Intranet</title>
+<style>
+  :root {
+    --red:       #C0241A;
+    --red-light: #F5E5E4;
+    --red-mid:   #A01E15;
+    --gray-bag:  #8C8680;
+    --gray-1:    #F4F3F2;
+    --gray-2:    #E8E6E4;
+    --gray-3:    #C5C1BC;
+    --gray-4:    #6B6560;
+    --gray-5:    #3A3633;
+    --white:     #FFFFFF;
+    --green:     #2E7D32;
+    --green-bg:  #E6F4EA;
+    --amber:     #B8600A;
+    --amber-bg:  #FBF1DC;
+    --font-sans: 'Segoe UI', Arial, sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    color: var(--gray-5);
+    background: var(--gray-1);
+    min-height: 100vh;
+  }
+
+  /* ── TOP BAR ── */
+  .topbar {
+    background: var(--gray-5); color: #ccc; font-size: 11px;
+    padding: 0 20px; height: 28px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px; letter-spacing: 0.03em;
+  }
+  .topbar-left { display: flex; gap: 20px; align-items: center; }
+  .topbar a { color: #aaa; text-decoration: none; }
+  .topbar a:hover { color: #fff; }
+  .topbar-user { display: flex; align-items: center; gap: 6px; }
+  .topbar-user span { color: #ccc; }
+  .topbar-user strong { color: #fff; }
+
+  /* ── BRAND HEADER ── */
+  .brand-header {
+    background: var(--white); border-bottom: 3px solid var(--red);
+    padding: 0 20px; height: 58px;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  }
+  .brand-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .brand-logo svg { flex-shrink: 0; }
+  .brand-name { font-size: 26px; font-weight: 800; color: var(--red); font-style: italic; letter-spacing: -0.5px; line-height: 1; }
+  .brand-subtitle { font-size: 11px; color: var(--gray-4); letter-spacing: 0.04em; text-transform: uppercase; margin-top: 2px; }
+  .header-search { display: flex; }
+  .header-search input {
+    border: 1px solid var(--gray-3); border-right: none; border-radius: 3px 0 0 3px;
+    padding: 5px 10px; font-size: 13px; width: 220px; outline: none;
+  }
+  .header-search input:focus { border-color: var(--red); }
+  .header-search button {
+    background: var(--red); border: 1px solid var(--red); color: #fff;
+    padding: 5px 10px; border-radius: 0 3px 3px 0; cursor: pointer; font-size: 13px;
+  }
+
+  /* ── NAVBAR ── */
+  .navbar { background: var(--red); padding: 0 20px; display: flex; height: 36px; }
+  .navbar a {
+    color: rgba(255,255,255,0.88); text-decoration: none; font-size: 12.5px; font-weight: 600;
+    padding: 0 14px; display: flex; align-items: center; letter-spacing: 0.02em;
+    border-bottom: 3px solid transparent;
+  }
+  .navbar a:hover { background: var(--red-mid); color: #fff; }
+  .navbar a.active { background: var(--red-mid); color: #fff; border-bottom-color: #fff; }
+
+  /* ── BREADCRUMB ── */
+  .breadcrumb-bar {
+    background: var(--gray-2); border-bottom: 1px solid var(--gray-3);
+    padding: 6px 20px; font-size: 11.5px; color: var(--gray-4);
+    display: flex; align-items: center; gap: 5px;
+  }
+  .breadcrumb-bar a { color: var(--red); text-decoration: none; }
+  .breadcrumb-bar a:hover { text-decoration: underline; }
+  .breadcrumb-bar .sep { color: var(--gray-3); }
+
+  /* ── LAYOUT ── */
+  .layout {
+    display: flex;
+    min-height: calc(100vh - 28px - 58px - 36px - 30px);
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  
+
+  /* ── CONTENT AREA ── */
+  .content-area { display: flex; flex: 1; min-width: 0; }
+
+  .main { flex: 1; padding: 28px 36px 60px 32px; min-width: 0; }
+
+  /* ── PAGE HEADER ── */
+  .page-header {
+    display: flex; align-items: flex-start; justify-content: space-between; gap: 16px;
+    margin-bottom: 24px; padding-bottom: 18px; border-bottom: 2px solid var(--gray-2);
+  }
+  .page-eyebrow { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--red); margin-bottom: 6px; }
+  .page-title { font-size: 24px; font-weight: 700; color: var(--gray-5); line-height: 1.2; }
+  .page-meta { margin-top: 8px; font-size: 11.5px; color: var(--gray-4); display: flex; gap: 16px; flex-wrap: wrap; }
+  .page-actions { display: flex; gap: 8px; flex-shrink: 0; margin-top: 4px; }
+  .btn {
+    padding: 6px 13px; border-radius: 3px; font-size: 12px; font-weight: 600;
+    cursor: pointer; border: 1px solid transparent;
+    text-decoration: none; display: inline-flex; align-items: center; gap: 5px;
+  }
+  .btn-outline { background: var(--white); border-color: var(--gray-3); color: var(--gray-5); }
+  .btn-outline:hover { border-color: var(--gray-4); background: var(--gray-1); }
+  .btn-primary { background: var(--red); color: #fff; border-color: var(--red); }
+  .btn-primary:hover { background: var(--red-mid); }
+
+  /* ── TOC ── */
+  .toc {
+    background: var(--gray-1); border: 1px solid var(--gray-2);
+    border-left: 3px solid var(--red); border-radius: 0 4px 4px 0;
+    padding: 14px 18px; margin-bottom: 28px;
+    display: inline-block; min-width: 300px;
+  }
+  .toc-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--gray-4); margin-bottom: 8px; }
+  .toc ol { padding-left: 18px; display: flex; flex-direction: column; gap: 4px; }
+  .toc li { font-size: 12.5px; }
+  .toc a { color: var(--red); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+
+  /* ── WIKI CONTENT ── */
+  .wiki-content h2 {
+    font-size: 17px; font-weight: 700; color: var(--gray-5);
+    margin: 32px 0 12px 0; padding-bottom: 6px; border-bottom: 1px solid var(--gray-2);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .wiki-content h2:first-of-type { margin-top: 0; }
+  .section-icon {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 24px; height: 24px; background: var(--red-light);
+    border-radius: 4px; color: var(--red); font-size: 13px; flex-shrink: 0;
+  }
+  .num-badge {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 24px; height: 24px; background: var(--red); color: #fff;
+    border-radius: 50%; font-size: 12px; font-weight: 800; flex-shrink: 0;
+  }
+  .wiki-content p { line-height: 1.7; color: var(--gray-5); margin-bottom: 12px; font-size: 14px; }
+
+  /* Schritt-Karten (nummeriert) */
+  .step-list { display: flex; flex-direction: column; gap: 10px; margin: 14px 0 18px 0; }
+  .step-card {
+    background: var(--white); border: 1px solid var(--gray-2); border-radius: 4px;
+    padding: 13px 16px; display: flex; align-items: flex-start; gap: 14px;
+  }
+  .step-num {
+    width: 28px; height: 28px; border-radius: 50%; background: var(--red-light); color: #111;
+    font-size: 13px; font-weight: 800; display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .step-body {}
+  .step-title { font-size: 14px; font-weight: 700; color: var(--gray-5); margin-bottom: 4px; }
+  .step-text { font-size: 13px; line-height: 1.6; color: var(--gray-4); }
+  .step-text strong { color: var(--gray-5); }
+
+  /* Checklisten */
+  .check-list { list-style: none; display: flex; flex-direction: column; gap: 7px; margin: 10px 0 16px 0; }
+  .check-list li {
+    font-size: 13.5px; line-height: 1.6; padding-left: 22px; position: relative; color: var(--gray-5);
+  }
+  .check-list li::before {
+    content: '☐'; position: absolute; left: 0; color: var(--gray-bag);
+    font-size: 14px; line-height: 1.4;
+  }
+
+  /* Bullet-Listen */
+  .bullet-list { list-style: none; display: flex; flex-direction: column; gap: 5px; margin: 10px 0 16px 0; }
+  .bullet-list li { font-size: 13.5px; line-height: 1.6; padding-left: 16px; position: relative; color: var(--gray-5); }
+  .bullet-list li::before { content: '›'; position: absolute; left: 0; color: var(--red); font-weight: 700; font-size: 15px; line-height: 1.4; }
+
+  /* Gut-zu-wissen-Box */
+  .gut-box {
+    background: var(--gray-1); border: 1px solid var(--gray-2);
+    border-left: 3px solid var(--gray-bag); border-radius: 0 4px 4px 0;
+    padding: 13px 16px; margin: 14px 0 18px 0;
+  }
+  .gut-box-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--gray-4); margin-bottom: 6px; display: flex; align-items: center; gap: 5px; }
+  .gut-box p { font-size: 13px; line-height: 1.65; color: var(--gray-5); margin-bottom: 6px; }
+  .gut-box p:last-child { margin-bottom: 0; }
+
+  /* Warnung-Box */
+  .warn-box {
+    background: var(--red-light); border: 1px solid #DFA8A4;
+    border-left: 3px solid var(--red); border-radius: 0 4px 4px 0;
+    padding: 13px 16px; margin: 14px 0 18px 0;
+  }
+  .warn-box-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--red); margin-bottom: 6px; display: flex; align-items: center; gap: 5px; }
+  .warn-box p { font-size: 13px; line-height: 1.65; color: var(--gray-5); margin-bottom: 6px; }
+  .warn-box p:last-child { margin-bottom: 0; }
+
+  /* Dos-&-Don'ts-Grid */
+  .dnd-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 14px 0 20px 0; }
+  .dnd-card { background: var(--white); border: 1px solid var(--gray-2); border-radius: 4px; overflow: hidden; }
+  .dnd-header { padding: 9px 14px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; display: flex; align-items: center; gap: 6px; }
+  .dnd-header.do { background: var(--green-bg); color: var(--green); }
+  .dnd-header.dont { background: var(--red-light); color: var(--red); }
+  .dnd-body { padding: 10px 14px; }
+  .dnd-item { font-size: 13px; line-height: 1.6; padding: 4px 0 4px 18px; position: relative; border-bottom: 1px solid var(--gray-2); }
+  .dnd-item:last-child { border-bottom: none; }
+  .dnd-item.do::before { content: '✓'; position: absolute; left: 0; color: var(--green); font-weight: 700; }
+  .dnd-item.dont::before { content: '✗'; position: absolute; left: 0; color: var(--red); font-weight: 700; }
+
+  /* Einwand-Tabelle */
+  .einwand-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 14px 0 18px 0; }
+  .einwand-table th {
+    background: var(--gray-5); color: #fff; padding: 8px 12px; text-align: left;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+  }
+  .einwand-table td { padding: 9px 12px; border-bottom: 1px solid var(--gray-2); vertical-align: top; line-height: 1.55; }
+  .einwand-table tr:nth-child(even) td { background: var(--gray-1); }
+  .einwand-table tr:hover td { background: var(--red-light); }
+  .einwand-table td:first-child { font-weight: 600; color: var(--red); width: 38%; }
+
+  /* Kompakt-Box */
+  .kompakt-box { background: var(--red); color: #fff; border-radius: 5px; padding: 20px 22px; margin: 32px 0 8px 0; }
+  .kompakt-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; opacity: 0.7; margin-bottom: 8px; }
+  .kompakt-box p { font-size: 15px; line-height: 1.65; color: #fff; margin: 0 0 8px 0; font-weight: 500; }
+  .kompakt-box p:last-child { margin-bottom: 0; }
+  .kompakt-box strong { font-weight: 800; }
+
+  /* ── RIGHT PANEL ── */
+  .right-panel { width: 220px; flex-shrink: 0; padding: 28px 0 40px 0; }
+  .info-card { background: var(--white); border: 1px solid var(--gray-2); border-radius: 4px; overflow: hidden; margin-bottom: 14px; }
+  .info-card-header { background: var(--gray-2); padding: 7px 12px; font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--gray-4); }
+  .info-card-body { padding: 10px 12px; font-size: 12px; color: var(--gray-5); line-height: 1.6; }
+  .info-card-body dl dt { font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gray-4); margin-top: 8px; }
+  .info-card-body dl dt:first-child { margin-top: 0; }
+  .info-card-body dl dd { margin: 2px 0 0 0; }
+  .related-link { display: block; padding: 6px 12px; font-size: 12.5px; color: var(--red); text-decoration: none; border-bottom: 1px solid var(--gray-2); }
+  .related-link:last-child { border-bottom: none; }
+  .related-link:hover { background: var(--red-light); }
+
+  /* ── FOOTER ── */
+  .site-footer { background: var(--gray-5); color: #888; font-size: 11px; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .site-footer a { color: #bbb; text-decoration: none; }
+  .footer-links { display: flex; gap: 16px; }
+
+  /* ══════════════════════════════════════════
+     DRUCKVORLAGE – nur beim Druck sichtbar
+     am Bildschirm ausgeblendet
+  ══════════════════════════════════════════ */
+  .print-template { display: none; }
+
+  /* ── PRINT STYLES ── */
+  @media print {
+    /* Intranet-Chrome ausblenden */
+    .topbar, .brand-header .header-search, .navbar, .breadcrumb-bar,
+    .page-actions, .sidebar, .right-panel, .site-footer,
+    .toc, .kompakt-box { display: none !important; }
+
+    body { background: #fff; font-size: 12px; }
+    .layout { display: block; max-width: none; min-height: 0; }
+    .content-area { display: block; }
+    .main { padding: 0; }
+
+    /* Wiki-Inhalt auf Seite 1 */
+    .wiki-screen { display: none !important; }
+
+    /* Druckvorlage einblenden */
+    .print-template { display: block !important; }
+
+    @page { size: A4; margin: 14mm 14mm 16mm 14mm; }
+    @page :first { margin-top: 10mm; }
+  }
+
+
+  /* ══════════════════════════════════════
+     DRUCKVORLAGE – Styling (nur Print)
+  ══════════════════════════════════════ */
+  @media print {
+
+    /* ─ Seitenkopf Druckvorlage ─ */
+    .pt-header {
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 3px solid #C0241A; padding-bottom: 8mm; margin-bottom: 6mm;
+    }
+    .pt-logo-area { display: flex; align-items: center; gap: 8px; }
+    .pt-brand { font-size: 22pt; font-weight: 900; color: #C0241A; font-style: italic; letter-spacing: -0.5px; line-height: 1; }
+    .pt-subtitle { font-size: 7pt; color: #6B6560; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px; }
+    .pt-doc-info { text-align: right; font-size: 8pt; color: #6B6560; line-height: 1.6; }
+    .pt-doc-title { font-size: 12pt; font-weight: 800; color: #3A3633; }
+
+    /* ─ Felder-Sektion ─ */
+    .pt-section { margin-bottom: 5mm; }
+    .pt-section-title {
+      font-size: 8pt; font-weight: 800; text-transform: uppercase;
+      letter-spacing: 0.08em; color: #fff; background: #3A3633;
+      padding: 2mm 4mm; margin-bottom: 3mm;
+      display: flex; align-items: center; gap: 4mm;
+      -webkit-print-color-adjust: exact; print-color-adjust: exact;
+    }
+    .pt-section-title.red { background: #C0241A; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .pt-section-title .pt-num {
+      width: 14pt; height: 14pt; border-radius: 50%;
+      background: rgba(255,255,255,0.25); color: #fff;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 8pt; font-weight: 900; flex-shrink: 0;
+    }
+
+    /* ─ Zwei-Spalten-Grid ─ */
+	.pt-grid-1 { display: grid; grid-template-columns: 1fr; gap: 4mm; margin-bottom: 3mm; }
+    .pt-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; margin-bottom: 3mm; }
+    .pt-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3mm; margin-bottom: 3mm; }
+
+    /* ─ Eingabe-Felder ─ */
+    .pt-field { margin-bottom: 2.5mm; }
+    .pt-label {
+      font-size: 7pt; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.06em; color: #6B6560; margin-bottom: 1mm; display: block;
+    }
+    .pt-line {
+      border: none; border-bottom: 1px solid #C5C1BC;
+      width: 100%; height: 6mm; display: block; background: transparent;
+    }
+    .pt-box {
+      border: 1px solid #C5C1BC; width: 100%; min-height: 24mm;
+      display: block; background: transparent;
+    }
+    .pt-box.tall { min-height: 26mm; }
+    .pt-box.xtall { min-height: 30mm; }
+
+    /* ─ Checkliste im Druck ─ */
+    .pt-checklist { list-style: none; padding: 0; }
+    .pt-checklist li {
+      font-size: 8.5pt; line-height: 1.5; padding: 1.5mm 0 1.5mm 6mm;
+      border-bottom: 1px solid #E8E6E4; position: relative;
+    }
+    .pt-checklist li:last-child { border-bottom: none; }
+    .pt-checklist li::before { content: '☐'; position: absolute; left: 0; color: #8C8680; font-size: 10pt; line-height: 1.2; }
+
+    /* ─ Ablauf-Schritte horizontal ─ */
+    .pt-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2mm; margin-bottom: 3mm; }
+    .pt-step { border: 1px solid #C5C1BC; border-top: 3px solid #C0241A; padding: 2mm 3mm; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .pt-step-num { font-size: 7pt; font-weight: 800; color: #C0241A; margin-bottom: 1mm; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .pt-step-title { font-size: 7.5pt; font-weight: 700; color: #3A3633; margin-bottom: 1.5mm; }
+    .pt-step-box { border: none; border-bottom: 1px solid #C5C1BC; width: 100%; height: 5.5mm; display: block; margin-bottom: 1mm; }
+
+    /* ─ Einwand-Notizbereich ─ */
+    .pt-einwand-row { display: grid; grid-template-columns: 2fr 3fr; gap: 3mm; margin-bottom: 2mm; }
+    .pt-einwand-label { font-size: 7pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #6B6560; margin-bottom: 1mm; display: block; }
+
+    /* ─ Fußzeile Druckvorlage ─ */
+    .pt-footer {
+      border-top: 3px solid #C5C1BC; margin-top: 10mm; padding-top: 3mm;
+      display: flex; justify-content: space-between; font-size: 7pt; color: #6B6560;
+    }
+    .pt-footer-field { display: flex; gap: 2mm; align-items: center; }
+    .pt-footer-line { border-bottom: 1px solid #C5C1BC; width: 35mm; height: 5mm; }
+
+    /* Seitenumbruch vor Druckvorlage */
+    .print-template { page-break-before: always; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-left">
+    <a href="#">Intranet-Startseite</a>
+    <a href="#">Schulungen</a>
+    <a href="#">Schwarzes Brett</a>
+    <a href="#">IT-Helpdesk</a>
+  </div>
+  <div class="topbar-user">
+    <span>Angemeldet als</span>
+    <strong>Verkauf – Filiale 07</strong>
+    <span>|</span>
+    <a href="#">Abmelden</a>
+  </div>
+</div>
+
+<!-- BRAND HEADER -->
+<header class="brand-header">
+  <a class="brand-logo" href="#">
+    <svg width="40" height="44" viewBox="0 0 40 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="4" y="14" width="32" height="26" rx="2" fill="#8C8680"/>
+      <path d="M14 14 C14 8 26 8 26 14" stroke="#8C8680" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <rect x="7" y="17" width="26" height="20" rx="1.5" fill="#A09B95"/>
+      <path d="M14 14 C14 8 26 8 26 14" stroke="#6B6560" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    </svg>
+    <div>
+      <div class="brand-name">Beska</div>
+      <div class="brand-subtitle">Warenhaus GmbH · Standort Nördlingen</div>
+    </div>
+  </a>
+  <div class="header-search">
+    <input type="text" placeholder="Wiki durchsuchen …" />
+    <button>&#128269;</button>
+  </div>
+</header>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <a href="#">Startseite</a>
+  <a href="#" class="active">Wiki &amp; Wissen</a>
+  <a href="#">Formulare</a>
+  <a href="#">Warenwirtschaft</a>
+  <a href="#">CRM</a>
+  <a href="#">Personal</a>
+  <a href="#">Kontakt</a>
+</nav>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb-bar">
+  <a href="#">Startseite</a>
+  <span class="sep">›</span>
+  <a href="#">Wiki &amp; Wissen</a>
+  <span class="sep">›</span>
+  <a href="#">Verkauf &amp; Kundenkontakt</a>
+  <span class="sep">›</span>
+  <span>Kundengespräch vorbereiten</span>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="layout">
+
+  <!-- CONTENT + RIGHT PANEL -->
+  <div class="content-area">
+    <main class="main">
+
+      <!-- wiki-screen: nur am Bildschirm sichtbar, beim Druck ausgeblendet -->
+      <div class="wiki-screen">
+
+        <!-- PAGE HEADER -->
+        <div class="page-header">
+          <div>
+            <div class="page-eyebrow">Wiki &amp; Wissen · Verkauf &amp; Kundenkontakt</div>
+            <h1 class="page-title">Kundengespräch vorbereiten</h1>
+            <div class="page-meta">
+              <span>&#128197; Zuletzt bearbeitet: 21. Juni 2026</span>
+              <span>&#128100; Verkauf &amp; Kundendienst</span>
+              <span>&#128203; Kategorie: Gesprächsführung</span>
+            </div>
+          </div>
+          <div class="page-actions">
+            <a href="#" class="btn btn-outline" onclick="window.print();return false;">&#128424; Vorlage drucken</a>
+          </div>
+        </div>
+
+        <!-- TOC -->
+        <div class="toc">
+          <div class="toc-title">Inhaltsverzeichnis</div>
+          <ol>
+            <li><a href="#warum">Warum eine gute Vorbereitung wichtig ist</a></li>
+            <li><a href="#vorbereitung">Vorbereitung auf ein Gespräch</a></li>
+            <li><a href="#gespraech">Tipps zur Gesprächsführung</a></li>
+            <li><a href="#nachbereitung">Dos &amp; Don'ts im Kundengespräch</a></li>
+            <li><a href="#kompakt">Wissen kompakt</a></li>
+          </ol>
+        </div>
+
+        <!-- ARTIKEL -->
+        <article class="wiki-content">
+
+          <section id="warum">
+            <h2><span class="section-icon">✦</span> Warum eine gute Vorbereitung wichtig ist</h2>
+            <p>Ein gutes Kundengespräch entsteht nicht durch Zufall. Wer sich vorbereitet, wirkt sicherer, kann besser zuhören und findet schneller die richtige Lösung für den Kunden.</p>
+            <p>Gute Vorbereitung bedeutet: Sie kennen den Kunden, Sie wissen, was Sie erreichen möchten, und Sie haben die wichtigsten Punkte im Kopf oder in Ihre Unterlagen zur Hand. Hier helfen vorab angefertigte Gesprächsnotizen.</p>
+            <div class="gut-box">
+              <div class="gut-box-label">&#128161; Tipp</div>
+              <p>Schauen Sie vor dem Gespräch in die <strong>Kundenkartei (CRM)</strong>. Dort finden Sie die Einkaufshistorie, offene Aktionen und frühere Notizen. Das spart Zeit und zeigt dem Kunden, dass Sie ihn kennen.</p>
+            </div>
+          </section>
+
+          <section id="vorbereitung">
+            <h2><span class="num-badge">1</span> Vorbereitung auf ein Gespräch</h2>
+            <p>Nehmen Sie sich vor jedem Gespräch kurz Zeit für drei Dinge: die wichtigsten Fakten zum Kunden, Ihr Ziel und Ihre Agenda (Vorgehen).</p>
+
+            <div class="step-list">
+              <div class="step-card">
+                <div class="step-num">A</div>
+                <div class="step-body">
+                  <div class="step-title">Hard Facts sammeln</div>
+                  <div class="step-text">Notieren Sie den <strong>Namen des Ansprechpartners</strong> und alle wichtigen Informationen, die Sie bereits kennen. Zum Beispiel: Kundennummer, betroffener Artikel. Diese Infos finden Sie in der Kundenkartei.</div>
+                </div>
+              </div>
+              <div class="step-card">
+                <div class="step-num">B</div>
+                <div class="step-body">
+                  <div class="step-title">Ziel festlegen</div>
+                  <div class="step-text">Fragen Sie sich: <strong>Was möchte ich am Ende dieses Gesprächs erreicht haben?</strong> Mögliche Ziele sind zum Beispiel: ein Anliegen klären, ein Angebot präsentieren oder einen Kauf abschließen. Ein klares Ziel hilft Ihnen, das Gespräch zu steuern.</div>
+                </div>
+              </div>
+              <div class="step-card">
+                <div class="step-num">C</div>
+                <div class="step-body">
+                  <div class="step-title">Agenda planen – besonders beim Beschwerdegespräch</div>
+                  <div class="step-text">Legen Sie <strong>3 bis 4 Kernpunkte</strong> fest, die Sie im Gespräch ansprechen möchten. So verlieren Sie den roten Faden nicht – gerade bei einem Beschwerdegespräch, das schnell emotional werden kann.</div>
+                  <div class="step-text" style="margin-top:8px;">Eine bewährte Reihenfolge für Beschwerdegespräche:<br>
+                    <strong>(1)</strong> Kunden ausreden lassen und Beschwerde anhören &nbsp;·&nbsp;
+                    <strong>(2)</strong> Verständnis zeigen &nbsp;·&nbsp;
+                    <strong>(3)</strong> Beschwerde erfassen &nbsp;·&nbsp;
+                    <strong>(4)</strong> Nächste Schritte im Beschwerdeprozess klar kommunizieren
+                  </div>
+                  <div class="step-text" style="margin-top:8px;color:var(--red);font-weight:600;">Tipp: Machen Sie sich vorab mit dem Beschwerde-Erfassungs-Formular vertraut.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="gut-box">
+              <div class="gut-box-label">&#128161; Gut zu wissen</div>
+              <p>Strukturierte Notizen helfen Ihnen, nichts zu vergessen.</p>
+            </div>
+          </section>
+
+          <section id="gespraech">
+            <h2><span class="num-badge">2</span> Tipps zur Gesprächsführung</h2>
+            <p>Ein gutes Gespräch folgt einer klaren Reihenfolge. Das gibt dem Kunden das Gefühl, dass er ernst genommen wird – und Ihnen die Kontrolle über den Ablauf.</p>
+
+            <div class="step-list">
+              <div class="step-card">
+                <div class="step-num">1</div>
+                <div class="step-body">
+                  <div class="step-title">Begrüßen &amp; Vertrauen aufbauen</div>
+                  <div class="step-text">Starten Sie freundlich. Nennen Sie den Kunden mit seinem Namen, wenn möglich. Zeigen Sie, dass Sie Zeit haben und zuhören möchten. <strong>Erste Sekunden prägen den gesamten Eindruck.</strong></div>
+                </div>
+              </div>
+              <div class="step-card">
+                <div class="step-num">2</div>
+                <div class="step-body">
+                  <div class="step-title">Anliegen anhören – ohne Unterbrechung</div>
+                  <div class="step-text">Lassen Sie den Kunden ausreden. Hören Sie aktiv zu: Halten Sie Blickkontakt, nicken Sie, machen Sie kurze Notizen. <strong>Unterbrechen Sie nie</strong>, auch wenn Sie bereits wissen, was der Kunde sagen will.</div>
+                </div>
+              </div>
+              <div class="step-card">
+                <div class="step-num">3</div>
+                <div class="step-body">
+                  <div class="step-title">Zusammenfassen &amp; Nachfragen</div>
+                  <div class="step-text">Fassen Sie das Gehörte in eigenen Worten zusammen. So zeigen Sie, dass Sie zugehört haben. Fragen Sie nach, wenn etwas unklar ist: <strong>„Habe ich das richtig verstanden, dass …?"</strong></div>
+                </div>
+              </div>
+              <div class="step-card">
+                <div class="step-num">4</div>
+                <div class="step-body">
+                  <div class="step-title">Gegebenenfalls Lösung anbieten</div>
+                  <div class="step-text">Schlagen Sie, wenn möglich eine konkrete Lösung vor. Erklären Sie, was Sie tun können – und was nicht. Seien Sie ehrlich. <strong>Versprechen Sie nur, was Sie auch halten können.</strong></div>
+                </div>
+              </div>
+              <div class="step-card">
+                <div class="step-num">5</div>
+                <div class="step-body">
+                  <div class="step-title">Nächste Schritte vereinbaren</div>
+                  <div class="step-text">Schließen Sie das Gespräch konkret ab: Informieren Sie die Kundschaft, wie es nun weiter geht.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="warn-box">
+              <div class="warn-box-label">&#9888; Wichtig beim Beschwerdegespräch</div>
+              <p>Entschuldigen Sie sich für die Unannehmlichkeiten – auch wenn der Fehler nicht bei Ihnen lag. Der Kunde möchte gehört und ernst genommen werden. Sagen Sie nie: <strong>„Das ist nicht mein Problem"</strong> oder <strong>„Das hätten Sie früher sagen müssen."</strong></p>
+            </div>
+          </section>
+		  
+		  <section id="dosdont">
+            <h2><span class="num-badge">3</span> Dos &amp; Don'ts im Kundengespräch</h2>
+            <p>Manche Dinge helfen im Gespräch – andere machen es schlimmer. Hier die wichtigsten Punkte auf einen Blick:</p>
+
+            <div class="dnd-grid">
+              <div class="dnd-card">
+                <div class="dnd-header do">✓ Das sollten Sie tun</div>
+                <div class="dnd-body">
+                  <div class="dnd-item do">Aktiv zuhören – Blickkontakt halten, nicken, nachfragen.</div>
+                  <div class="dnd-item do">Den Kunden mit seinem Namen ansprechen.</div>
+                  <div class="dnd-item do">Sich für Unannehmlichkeiten entschuldigen.</div>
+                  <div class="dnd-item do">Konkrete Lösungen anbieten, keine leeren Versprechen.</div>
+                  <div class="dnd-item do">Ruhig und freundlich bleiben – auch bei lauten Kunden.</div>
+				  <div class="dnd-item do">Wählen Sie einen ruhigen Ort für das Gespräch, möglichst ohne andere Kunden.</div>
+                  <div class="dnd-item do">Alles Wichtige nach oder während dem Gespräch dokumentieren.</div>
+                  <div class="dnd-item do">Bei Unsicherheit eine Kollegin oder den Vorgesetzten hinzuziehen.</div>
+                </div>
+              </div>
+              <div class="dnd-card">
+                <div class="dnd-header dont">✗ Das sollten Sie vermeiden</div>
+                <div class="dnd-body">
+                  <div class="dnd-item dont">Den Kunden unterbrechen oder seine Aussagen kleinreden.</div>
+                  <div class="dnd-item dont">Schuld auf Kollegen oder andere Abteilungen schieben.</div>
+                  <div class="dnd-item dont">Etwas versprechen, das Sie nicht einhalten können.</div>
+                  <div class="dnd-item dont">Fachbegriffe benutzen, den der Kunde nicht versteht.</div>
+                  <div class="dnd-item dont">Das Gespräch ohne klares Ergebnis beenden.</div>
+                  <div class="dnd-item dont">Emotionen des Kunden ignorieren oder abtun.</div>
+				  <div class="dnd-item dont">Sagen: „Das ist nicht mein Bereich" – ohne eine Alternative zu nennen.</div>
+                  <div class="dnd-item dont">Bei Beschwerden: Kunden im Unklaren lassen, wie es weitergeht.</div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="kompakt">
+            <div class="kompakt-box">
+              <div class="kompakt-label">&#9733; Wissen kompakt</div>
+              <p><strong>Vorbereitung</strong> schlägt Improvisation. Wer Hard Facts kennt, ein klares Ziel hat und eine Agenda mitbringt, führt bessere Gespräche.</p>
+              <p>Im Gespräch gilt: <strong>Zuhören vor Reden.</strong></p>
+            </div>
+          </section>
+
+        </article>
+      </div><!-- end wiki-screen -->
+
+    </main>
+
+    <!-- RIGHT PANEL -->
+    <aside class="right-panel">
+      <div class="info-card">
+        <div class="info-card-header">Seiten-Info</div>
+        <div class="info-card-body">
+          <dl>
+            <dt>Erstellt</dt><dd>21. Juni 2026</dd>
+            <dt>Autor</dt><dd>Verkauf &amp; Kundendienst</dd>
+            <dt>Freigegeben von</dt><dd>Filialleitung Nördlingen</dd>
+            <dt>Kategorie</dt><dd>Gesprächsführung</dd>
+          </dl>
+        </div>
+      </div>
+
+    </aside>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <span>© 2026 Beska Warenhaus GmbH · Intranet Standort Nördlingen · Alle Angaben ohne Gewähr</span>
+  <div class="footer-links">
+    <a href="#">Impressum</a>
+    <a href="#">Datenschutz</a>
+    <a href="#">IT-Helpdesk</a>
+    <a href="#">Feedback</a>
+  </div>
+</footer>
+
+</body>
+</html>
